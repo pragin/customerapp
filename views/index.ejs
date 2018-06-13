@@ -1,0 +1,26 @@
+<% include partials/header%>
+  <form method='post' action = '/users/add'>
+    <label>First Name:</label><br />
+    <input type="text" name= "first_name" />
+    <br />
+    <label>Last Name</label><br/>
+
+    <input type="text" name = "last_name" />
+    <br />
+    <label>Email</label><br />
+    <input type="email" name="email"/><br/><br />
+    <button type="submit" >Submit</button>
+  </form>
+  <ul>
+    <% users.forEach((user) => { %>
+        <li>
+          <%= user.first_name %>
+          <%= user.last_name %>
+          <%= user.age %>
+        </li>
+    <% }); %>
+
+  </ul>
+
+
+<% include partials/footer %>
