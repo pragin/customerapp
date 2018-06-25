@@ -52,7 +52,7 @@ let user = new User({
 
 });
 
-app.get('/', (req, res) => {
+app.get('/', function(req, res) {
   db.on('error', console.error.bind(console, 'connection error'));
     User.find({}, function(err, users){
       if(err) throw err;
@@ -63,7 +63,7 @@ app.get('/', (req, res) => {
   });
 });
 
-app.post('/users/add', (req, res) => {
+app.post('/users/add', function(req, res) {
   let newUser = {
     first_name: req.body.first_name,
     last_name: req.body.last_name,
@@ -74,6 +74,14 @@ app.post('/users/add', (req, res) => {
       User.create(newUser, function(err, result) {
         if (err) console.log(err);
         res.redirect('/');
+    });
+  });
+
+  app.delete('/users/delete/:id', function(req, res){
+    console.log(req.params.id);
+    User.deleteOne({_id : req.params.id}, function (err, result){
+      if (err) console.log(err);
+      res.redirect('/');
     });
   });
 app.listen(3000, () => console.log('Server started at port 3000...'));
